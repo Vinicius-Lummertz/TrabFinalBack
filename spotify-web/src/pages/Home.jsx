@@ -2,7 +2,7 @@ import { useEffect, useState, useContext } from 'react';
 import api from '../api';
 import { AuthContext } from '../AuthContext';
 import { Search, Plus, ListMusic, X } from 'lucide-react';
-import ReactPlayer from 'react-player'; // Import do Player
+import ReactPlayer from 'react-player'
 
 const Home = () => {
     const { user } = useContext(AuthContext);
@@ -61,7 +61,6 @@ const Home = () => {
 
     return (
         <div>
-            {/* Search Bar */}
             <div className="mb-8">
                 <form onSubmit={handleSearch} className="relative max-w-xl mx-auto">
                     <input
@@ -83,7 +82,7 @@ const Home = () => {
                         {/* Player de Vídeo */}
                         <div className="aspect-video bg-black relative">
                             <ReactPlayer
-                                url={song.url}
+                                src={song.url}
                                 width="100%"
                                 height="100%"
                                 light={true} // Mostra thumbnail antes de carregar o pesado
