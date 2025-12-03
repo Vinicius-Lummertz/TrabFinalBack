@@ -2,8 +2,10 @@ import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../AuthContext';
 import api from '../api';
 import { ListMusic, Plus, Play, Lock, Globe } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const Playlists = () => {
+    const navigate = useNavigate();
     const { user } = useContext(AuthContext);
     const [playlists, setPlaylists] = useState([]);
     const [isCreating, setIsCreating] = useState(false);
@@ -93,7 +95,7 @@ const Playlists = () => {
             {/* Grid de Playlists */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {playlists.map(playlist => (
-                    <div key={playlist.id} className="bg-white group hover:bg-coffee-50 transition p-6 rounded-xl border border-coffee-100 shadow-sm relative cursor-pointer">
+                    <div key={playlist.id} onClick={() => navigate(`/playlists/${playlist.id}`)} className="bg-white group hover:bg-coffee-50 transition p-6 rounded-xl border border-coffee-100 shadow-sm relative cursor-pointer">
                         <div className="absolute top-4 right-4 text-coffee-300">
                             {playlist.isPublic ? <Globe className="w-4 h-4" /> : <Lock className="w-4 h-4" />}
                         </div>

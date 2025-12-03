@@ -1,5 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { Home, User, ListMusic, Settings, LogOut, Music } from 'lucide-react';
+import { Home, User, ListMusic, Settings, LogOut, Music, UploadCloud } from 'lucide-react';
 import { useContext } from 'react';
 import { AuthContext } from '../AuthContext';
 
@@ -38,6 +38,10 @@ const Layout = ({ children }) => {
                         
                         <button onClick={() => handleNavigation('/playlists')} className="flex items-center gap-3 text-coffee-700 hover:text-coffee-500 font-medium transition w-full text-left">
                             <ListMusic className="w-5 h-5" /> Playlists
+                        </button>
+
+                        <button onClick={() => handleNavigation('/upload')} className="flex items-center gap-3 text-coffee-700 hover:text-coffee-500 font-medium transition w-full text-left">
+                            <UploadCloud className="w-5 h-5" /> Postar Música
                         </button>
                     </nav>
                 </div>

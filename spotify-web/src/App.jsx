@@ -5,6 +5,8 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
 import Playlists from './pages/Playlists';
+import UploadSong from './pages/UploadSong'
+import PlaylistDetails from './pages/PlaylistDetails';
 
 const Settings = () => <div className="text-center mt-10">Configurações (Em breve)</div>;
 
@@ -18,7 +20,9 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/playlists" element={<Playlists />} />
+            <Route path="/playlists/:id" element={<PlaylistDetails />} />
             <Route path="/settings" element={<Settings />} />
+            <Route path="/upload" element={<UploadSong />} />
           </Routes>
         </Layout>
       </BrowserRouter>

@@ -25,16 +25,16 @@ public class SongService {
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
 
-    @Transactional // Garante que a atualização do usuário e a criação da música sejam atômicas
+    @Transactional
     public SongResponseDTO create(SongRequestDTO dto) {
         Album album = albumRepository.findById(dto.getAlbumId())
                 .orElseThrow(() -> new RuntimeException("Álbum não encontrado"));
 
         Song song = modelMapper.map(dto, Song.class);
         song.setAlbum(album);
+        song.setId(null);
         Song savedSong = songRepository.save(song);
 
-        // REGRA DE NEGÓCIO: Promover usuário a Artista se ainda não for
         User artist = album.getArtist();
         if (!artist.getIsArtist()) {
             artist.setIsArtist(true);

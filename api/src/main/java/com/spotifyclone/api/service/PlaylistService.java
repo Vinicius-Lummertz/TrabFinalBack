@@ -30,25 +30,26 @@ public class PlaylistService {
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
 
-    // Criar Playlist
+
     public PlaylistResponseDTO create(PlaylistRequestDTO dto) {
         User owner = userRepository.findById(dto.getOwnerId())
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
 
         Playlist playlist = modelMapper.map(dto, Playlist.class);
         playlist.setOwner(owner);
+        playlist.setId(null);
 
         return modelMapper.map(playlistRepository.save(playlist), PlaylistResponseDTO.class);
     }
 
-    // Listar Apenas Públicas (Para o Feed Geral)
+
     public List<PlaylistResponseDTO> findAllPublic() {
         return playlistRepository.findByIsPublicTrue().stream()
                 .map(p -> modelMapper.map(p, PlaylistResponseDTO.class))
                 .collect(Collectors.toList());
     }
 
-    // Listar Todas de um Usuário (Perfil dele)
+
     public List<PlaylistResponseDTO> findByUser(Long userId) {
         return playlistRepository.findByOwnerId(userId).stream()
                 .map(p -> modelMapper.map(p, PlaylistResponseDTO.class))
@@ -57,7 +58,7 @@ public class PlaylistService {
 
     private final SongRepository songRepository; // Injete isso no construtor também!
 
-    @Transactional // Importante: Garante que o banco salve a relação
+    @Transactional
     public void addSongToPlaylist(Long playlistId, Long songId) {
         // 1. Busca a Playlist
         Playlist playlist = playlistRepository.findById(playlistId)
