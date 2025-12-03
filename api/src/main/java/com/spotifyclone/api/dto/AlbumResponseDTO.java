@@ -2,6 +2,7 @@ package com.spotifyclone.api.dto;
 
 import lombok.Data;
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 public class AlbumResponseDTO {
@@ -13,4 +14,6 @@ public class AlbumResponseDTO {
 
     // O ModelMapper vai pegar automaticamente o user.getName()
     private String artistName;
+
+    private List<SongResponseDTO> songs;
 }

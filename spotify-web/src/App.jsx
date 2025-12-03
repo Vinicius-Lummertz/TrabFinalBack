@@ -8,6 +8,8 @@ import Playlists from './pages/Playlists';
 import UploadSong from './pages/UploadSong'
 import PlaylistDetails from './pages/PlaylistDetails';
 import DatabaseSchema from './pages/DatabaseSchema'; 
+import MyAlbums from './pages/MyAlbums';
+import AlbumDetails from './pages/AlbumDetails';
 
 const Settings = () => <div className="text-center mt-10">Configurações (Em breve)</div>;
 
@@ -25,6 +27,8 @@ function App() {
             <Route path="/settings" element={<Settings />} />
             <Route path="/upload" element={<UploadSong />} />
             <Route path="/database" element={<DatabaseSchema />} />
+            <Route path="/my-albums" element={<MyAlbums />} />
+            <Route path="/albums/:id" element={<AlbumDetails />} />
           </Routes>
         </Layout>
       </BrowserRouter>

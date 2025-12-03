@@ -22,7 +22,7 @@ public class AppConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**") // Aplica a todas as rotas
-                        .allowedOrigins("http://localhost:3000", "http://localhost:5173") // Permite React (Vite ou CRA)
+                        .allowedOrigins("http://localhost:3000", "http://localhost:5173")
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("*");
             }

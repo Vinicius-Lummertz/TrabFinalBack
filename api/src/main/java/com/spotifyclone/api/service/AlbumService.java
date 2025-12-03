@@ -11,6 +11,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -35,5 +36,31 @@ public class AlbumService {
                 .map(album -> modelMapper.map(album, AlbumResponseDTO.class))
                 .collect(Collectors.toList());
     }
-    // Implementar métodos de listar álbuns conforme necessidade
+
+    public AlbumResponseDTO findById(Long id) {
+        Album album = albumRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Álbum não encontrado"));
+        return modelMapper.map(album, AlbumResponseDTO.class);
+    }
+
+
+    public AlbumResponseDTO update(Long id, AlbumRequestDTO dto) {
+        Album album = albumRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Álbum não encontrado"));
+
+        // Atualiza campos permitidos
+        album.setTitle(dto.getTitle());
+        album.setReleaseDate(dto.getReleaseDate());
+
+        return modelMapper.map(albumRepository.save(album), AlbumResponseDTO.class);
+    }
+
+    //Deletar Álbum (Leva as músicas junto pelo Cascade)
+    @Transactional
+    public void delete(Long id) {
+        if (!albumRepository.existsById(id)) {
+            throw new RuntimeException("Álbum não encontrado");
+        }
+        albumRepository.deleteById(id);
+    }
 }

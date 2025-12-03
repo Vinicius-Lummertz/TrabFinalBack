@@ -27,4 +27,20 @@ public class AlbumController {
     public List<AlbumResponseDTO> listByArtist(@PathVariable Long artistId) {
         return albumService.findAllByArtist(artistId);
     }
+
+    @GetMapping("/{id}")
+    public AlbumResponseDTO findById(@PathVariable Long id) {
+        return albumService.findById(id);
+    }
+
+    @PutMapping("/{id}")
+    public AlbumResponseDTO update(@PathVariable Long id, @RequestBody @Valid AlbumRequestDTO dto) {
+        return albumService.update(id, dto);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable Long id) {
+        albumService.delete(id);
+    }
 }
