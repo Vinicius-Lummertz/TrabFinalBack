@@ -19,12 +19,14 @@ public class User {
     @Column(unique = true, nullable = false)
     private String email;
 
-    private String password; // Em produção, usaria BCrypt
+    private String password;
 
-    // Regra de negócio: True se tiver pelo menos 1 música publicada
     private Boolean isArtist = false;
 
-    // Relacionamento: Um usuário pode ter várias playlists
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
     private List<Playlist> playlists;
+
+
+    @OneToMany(mappedBy = "artist", cascade = CascadeType.ALL)
+    private List<Album> albums;
 }

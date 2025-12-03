@@ -39,4 +39,10 @@ public class UserController {
         // Mas para ser rápido, vou injetar a lógica aqui ou idealmente no Service:
         return userService.update(id, dto);
     }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable Long id) {
+        userService.delete(id);
+    }
 }

@@ -58,4 +58,11 @@ public class UserService {
 
         return modelMapper.map(userRepository.save(user), UserResponseDTO.class);
     }
+
+    public void delete(Long id) {
+        if (!userRepository.existsById(id)) {
+            throw new RuntimeException("Usuário não encontrado");
+        }
+        userRepository.deleteById(id);
+    }
 }

@@ -66,13 +66,24 @@ const Profile = () => {
     };
 
     const handleDeleteAccount = async () => {
-        if (window.confirm("ATENÇÃO: Isso excluirá sua conta permanentemente. Continuar?")) {
-            // Aqui chamaria api.delete(`/users/${user.id}`) se tivéssemos implementado
-            alert("Conta desativada.");
-            logout();
-            navigate('/');
-        }
-    };
+            // Confirmação dupla para evitar acidentes
+            const confirm1 = window.confirm("ATENÇÃO: Isso excluirá sua conta permanentemente.");
+            if (confirm1) {
+                const confirm2 = window.confirm("Tem certeza absoluta? Suas músicas e playlists sumirão para sempre.");
+                if (confirm2) {
+                    try {
+                        await api.delete(`/users/${user.id}`);
+
+                        alert("Conta excluída com sucesso. Sentiremos sua falta!");
+                        logout();
+                        navigate('/login');
+                    } catch (error) {
+                        console.error(error);
+                        alert("Erro ao excluir conta. Tente novamente.");
+                    }
+                }
+            }
+        };
 
     // --- AÇÕES DAS MÚSICAS ---
 
