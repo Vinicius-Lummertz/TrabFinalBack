@@ -50,4 +50,15 @@ public class PlaylistController {
     public void removeSong(@PathVariable Long id, @PathVariable Long songId) {
         playlistService.removeSongFromPlaylist(id, songId);
     }
+
+    @PutMapping("/{id}")
+    public PlaylistResponseDTO update(@PathVariable Long id, @RequestBody @Valid PlaylistRequestDTO dto) {
+        return playlistService.update(id, dto);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable Long id) {
+        playlistService.delete(id);
+    }
 }

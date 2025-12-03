@@ -94,4 +94,23 @@ public class PlaylistService {
                 .orElseThrow(() -> new RuntimeException("Playlist não encontrada"));
         return modelMapper.map(playlist, PlaylistResponseDTO.class);
     }
+
+    public PlaylistResponseDTO update(Long id, PlaylistRequestDTO dto) {
+        Playlist playlist = playlistRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Playlist não encontrada"));
+
+        playlist.setName(dto.getName());
+        playlist.setDescription(dto.getDescription());
+        playlist.setIsPublic(dto.getIsPublic());
+        // Não alteramos o dono (owner) na edição por segurança
+
+        return modelMapper.map(playlistRepository.save(playlist), PlaylistResponseDTO.class);
+    }
+
+    public void delete(Long id) {
+        if (!playlistRepository.existsById(id)) {
+            throw new RuntimeException("Playlist não encontrada");
+        }
+        playlistRepository.deleteById(id);
+    }
 }
