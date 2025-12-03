@@ -20,7 +20,7 @@ const Profile = () => {
     useEffect(() => {
             if (user) {
                 // 1. Preenche o formulário com o que já temos
-                setProfileForm({ name: user.name, email: user.email, password: user.password || '' });
+                setProfileForm({ name: user.name, email: user.email, password: user.password });
 
                 // 2. O PULO DO GATO: Busca os dados frescos do servidor agora!
                 api.get(`/users/${user.id}`)
@@ -182,7 +182,7 @@ const Profile = () => {
                                     type="password"
                                     className="w-full p-2 border border-coffee-200 rounded bg-coffee-50"
                                     value={profileForm.password}
-                                    onChange={e => setProfileForm({...profileForm, password: e.target.value})}
+                                    onChange={e => setProfileForm({...profileForm, password: e.target.value })}
                                 />
                             </div>
                         </div>
