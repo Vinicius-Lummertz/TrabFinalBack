@@ -72,4 +72,15 @@ public class SongService {
             userRepository.save(artist);
         }
     }
+
+    public SongResponseDTO update(Long id, SongRequestDTO dto) {
+        Song song = songRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Música não encontrada"));
+
+        song.setTitle(dto.getTitle());
+        song.setUrl(dto.getUrl());
+        // song.setDuration... se quiser
+
+        return modelMapper.map(songRepository.save(song), SongResponseDTO.class);
+    }
 }

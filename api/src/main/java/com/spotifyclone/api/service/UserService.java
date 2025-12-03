@@ -46,4 +46,16 @@ public class UserService {
 
         return modelMapper.map(user, UserResponseDTO.class);
     }
+
+    public UserResponseDTO update(Long id, UserRequestDTO dto) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+
+        // Atualiza os campos
+        user.setName(dto.getName());
+        user.setEmail(dto.getEmail());
+        user.setPassword(dto.getPassword()); // Em produção criptografaria de novo
+
+        return modelMapper.map(userRepository.save(user), UserResponseDTO.class);
+    }
 }

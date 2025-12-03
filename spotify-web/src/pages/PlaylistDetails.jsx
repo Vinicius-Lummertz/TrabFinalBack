@@ -82,7 +82,7 @@ const PlaylistDetails = () => {
                             {/* Player */}
                             <div className="aspect-video bg-black relative">
                                 <ReactPlayer
-                                    url={song.url}
+                                    src={song.url}
                                     width="100%"
                                     height="100%"
                                     light={true}

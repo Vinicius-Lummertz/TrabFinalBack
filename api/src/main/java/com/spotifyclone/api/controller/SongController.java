@@ -37,4 +37,9 @@ public class SongController {
     public void delete(@PathVariable Long id) {
         songService.delete(id);
     }
+
+    @PutMapping("/{id}")
+    public SongResponseDTO update(@PathVariable Long id, @RequestBody @Valid SongRequestDTO dto) {
+        return songService.update(id, dto);
+    }
 }
