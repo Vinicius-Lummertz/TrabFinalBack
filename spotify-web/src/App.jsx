@@ -7,6 +7,7 @@ import Profile from './pages/Profile';
 import Playlists from './pages/Playlists';
 import UploadSong from './pages/UploadSong'
 import PlaylistDetails from './pages/PlaylistDetails';
+import DatabaseSchema from './pages/DatabaseSchema'; 
 
 const Settings = () => <div className="text-center mt-10">Configurações (Em breve)</div>;
 
@@ -23,6 +24,7 @@ function App() {
             <Route path="/playlists/:id" element={<PlaylistDetails />} />
             <Route path="/settings" element={<Settings />} />
             <Route path="/upload" element={<UploadSong />} />
+            <Route path="/database" element={<DatabaseSchema />} />
           </Routes>
         </Layout>
       </BrowserRouter>
